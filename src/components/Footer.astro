@@ -1,0 +1,50 @@
+---
+import { nav, site } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container inner">
+    <div>
+      <a class="brand" href="/">
+        <img src="/images/brand/pv-logo.png" alt="" width="44" height="44" />
+        <span>{site.name}</span>
+      </a>
+      <p class="muted">{site.tagline}<br />{site.school} · {site.location}</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="first">
+      <img src="/images/brand/first-logo.png" alt="FIRST" width="111" height="70" />
+      <p class="muted small">
+        Proud participants in <em>FIRST</em>® Tech Challenge and <em>FIRST</em>® Robotics Competition.
+      </p>
+    </div>
+  </div>
+  <div class="container legal muted small">© {year} Pleasant Valley FIRST Robotics</div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--border); background: var(--bg-2); padding-top: 3.5rem; }
+  .inner { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .brand img { border-radius: 50%; background: #fff; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+  ul a { color: var(--muted); text-decoration: none; }
+  ul a:hover { color: var(--text); }
+  .first img { background: #fff; border-radius: 10px; padding: 6px 10px; margin-bottom: 0.75rem; }
+  .small { font-size: 0.875rem; }
+  .legal { padding-block: 2rem; margin-top: 2.5rem; border-top: 1px solid var(--border); }
+</style>

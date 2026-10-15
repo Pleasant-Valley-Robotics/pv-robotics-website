@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TeamCard from '../components/TeamCard.astro';
+import SponsorGrid from '../components/SponsorGrid.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { site } from '../data/site';
+
+const teams = (await getCollection('teams')).sort((a, b) => a.data.order - b.data.order);
+const outreachCount = teams.reduce((n, t) => n + t.data.outreach.length, 0);
+---
+
+<Base>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <span class="eyebrow">{site.school} · {site.location}</span>
+      <h1>PVHS <span class="gradient-text">Robotics</span></h1>
+      <p class="tagline">{site.tagline}</p>
+      <p class="lede">
+        Three <em>FIRST</em> teams where students design, build, code and compete with real robots, and learn the teamwork, problem solving and communication skills that last well past graduation.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#teams">Meet our teams</a>
+        <a class="btn btn--ghost" href="/about">What is PV FIRST?</a>
+      </div>
+
+      <dl class="stats">
+        <div><dt>Teams</dt><dd>3</dd></div>
+        <div><dt>Since</dt><dd>2012</dd></div>
+        <div><dt>Outreach projects</dt><dd>{outreachCount}+</dd></div>
+        <div><dt>Grades</dt><dd>9–12</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container grid grid--2">
+      <div class="card feature">
+        <span class="eyebrow">STEM for students</span>
+        <h2>More than building a robot.</h2>
+        <p class="muted">
+          The robotics programs at Pleasant Valley High School introduce young adults to science, technology, engineering and math. Students learn problem solving and the design process, along with communication, teamwork and presentation skills.
+        </p>
+      </div>
+      <div class="card feature">
+        <span class="eyebrow">Our purpose</span>
+        <h2>Skills, confidence, resilience.</h2>
+        <p class="muted">
+          The mission of <em>FIRST</em> is to provide life-changing robotics programs that give young people the skills, confidence and resilience to build a better world. PVCSD Robotics carries those values forward and connects students with mentors and the everyday applications of STEAM.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="teams">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our teams</span>
+        <h2>Two FTC teams. One FRC team.</h2>
+        <p class="lede">Each team has its own identity, goals and outreach, all under the Pleasant Valley FIRST umbrella.</p>
+      </div>
+      <div class="grid grid--3">
+        {teams.map((team) => <TeamCard team={team} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Thank you</span>
+        <h2>Our sponsors</h2>
+        <p class="lede">These organizations make our season possible.</p>
+      </div>
+      <SponsorGrid />
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>
+
+<style>
+  .hero { position: relative; overflow: hidden; padding-block: clamp(72px, 12vw, 150px) clamp(56px, 8vw, 96px); }
+  .glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(700px 420px at 12% 0%, rgb(139 92 246 / 0.42), transparent 70%),
+      radial-gradient(640px 420px at 95% 30%, rgb(34 211 238 / 0.24), transparent 70%),
+      linear-gradient(transparent 55%, var(--bg));
+    pointer-events: none;
+  }
+  /* Faint circuit-board grid, a nod to the old PVHS Robotics artwork. */
+  .glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(167 139 250 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(167 139 250 / 0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 30% 20%, #000 20%, transparent 70%);
+  }
+  .hero-inner { position: relative; }
+  h1 { font-size: clamp(3rem, 9vw, 6.5rem); margin-bottom: 0.15em; }
+  .tagline { font-family: var(--font-display); font-size: clamp(1.25rem, 2.6vw, 1.75rem); font-weight: 500; margin-bottom: 1rem; }
+  .lede { margin-bottom: 2rem; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    margin: clamp(3rem, 7vw, 5rem) 0 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .stats div { background: rgb(13 20 51 / 0.9); padding: 1.25rem 1.5rem; }
+  .stats dt { color: var(--muted); font-size: 0.85rem; }
+  .stats dd { margin: 0; font-family: var(--font-display); font-size: 2.25rem; font-weight: 700; }
+
+  .feature { padding: clamp(1.75rem, 4vw, 2.75rem); }
+  .feature h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+</style>

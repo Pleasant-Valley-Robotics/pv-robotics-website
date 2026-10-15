@@ -1,0 +1,32 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+// Each team is one Markdown file in src/content/teams/.
+// The frontmatter (between the --- lines) holds the facts; the body is the team's story.
+const teams = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/teams' }),
+  schema: z.object({
+    name: z.string(),
+    shortName: z.string(),
+    program: z.enum(['FTC', 'FRC']),
+    number: z.number(),
+    founded: z.string().optional(),
+    tagline: z.string(),
+    logo: z.string(),
+    photo: z.string().optional(),
+    photoAlt: z.string().optional(),
+    accent: z.string(),
+    order: z.number(),
+    email: z.string().optional(),
+    socials: z
+      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .default([]),
+    highlights: z.array(z.string()).default([]),
+    sections: z
+      .array(z.object({ title: z.string(), items: z.array(z.object({ title: z.string(), body: z.string() })) }))
+      .default([]),
+    outreach: z.array(z.object({ title: z.string(), body: z.string() })).default([]),
+  }),
+});
+
+export const collections = { teams };

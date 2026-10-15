@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SponsorGrid from '../components/SponsorGrid.astro';
+import { site } from '../data/site';
+---
+
+<Base title="Sponsors" description="The organizations that support Pleasant Valley FIRST Robotics, and how to become a sponsor.">
+  <PageHero eyebrow="Thank you" title="Our sponsors">
+    Robots, registration fees, tools and travel all cost money. These partners make it possible for Pleasant Valley students to compete and grow.
+  </PageHero>
+
+  <section class="section">
+    <div class="container"><SponsorGrid /></div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container grid grid--3">
+      <div class="card">
+        <h3>Where support goes</h3>
+        <p class="muted">Robot parts and kits, competition registration, shop tooling, travel to events, and outreach like summer camps and FLL mentoring.</p>
+      </div>
+      <div class="card">
+        <h3>What sponsors get</h3>
+        <p class="muted">Recognition on our website, robots and team apparel, plus a direct connection to the next generation of engineers in the Quad Cities.</p>
+      </div>
+      <div class="card">
+        <h3>Ways to help</h3>
+        <p class="muted">Financial sponsorship, in-kind donations of materials or machining, shop tours, or volunteering as a mentor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container center">
+      <h2>Interested in sponsoring?</h2>
+      <p class="lede">We'd love to talk about how your organization can get involved.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={`mailto:${site.contactEmail}?subject=Sponsoring%20PV%20Robotics`}>Email us</a>
+        <a class="btn btn--ghost" href="/contact">All contact info</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .center { text-align: center; }
+  .center .lede { margin-inline: auto; }
+  .center .btn-row { justify-content: center; }
+</style>
