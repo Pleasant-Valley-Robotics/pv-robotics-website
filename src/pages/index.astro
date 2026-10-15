@@ -8,6 +8,11 @@ import { site } from '../data/site';
 
 const teams = (await getCollection('teams')).sort((a, b) => a.data.order - b.data.order);
 const outreachCount = teams.reduce((n, t) => n + t.data.outreach.length, 0);
+const words = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+const count = (n: number) => words[n] ?? String(n);
+const ftc = teams.filter((t) => t.data.program === 'FTC').length;
+const frc = teams.filter((t) => t.data.program === 'FRC').length;
+const plural = (n: number, w: string) => `${count(n)} ${w} team${n === 1 ? '' : 's'}.`;
 ---
 
 <Base>
@@ -18,7 +23,7 @@ const outreachCount = teams.reduce((n, t) => n + t.data.outreach.length, 0);
       <h1>PVHS <span class="gradient-text">Robotics</span></h1>
       <p class="tagline">{site.tagline}</p>
       <p class="lede">
-        Three <em>FIRST</em> teams where students design, build, code and compete with real robots, and learn the teamwork, problem solving and communication skills that last well past graduation.
+        {count(teams.length)} <em>FIRST</em> teams where students design, build, code and compete with real robots, and learn the teamwork, problem solving and communication skills that last well past graduation.
       </p>
       <div class="btn-row">
         <a class="btn btn--primary" href="#teams">Meet our teams</a>
@@ -26,7 +31,7 @@ const outreachCount = teams.reduce((n, t) => n + t.data.outreach.length, 0);
       </div>
 
       <dl class="stats">
-        <div><dt>Teams</dt><dd>3</dd></div>
+        <div><dt>Teams</dt><dd>{teams.length}</dd></div>
         <div><dt>Since</dt><dd>2012</dd></div>
         <div><dt>Outreach projects</dt><dd>{outreachCount}+</dd></div>
         <div><dt>Grades</dt><dd>9–12</dd></div>
@@ -57,10 +62,10 @@ const outreachCount = teams.reduce((n, t) => n + t.data.outreach.length, 0);
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Our teams</span>
-        <h2>Two FTC teams. One FRC team.</h2>
+        <h2>{plural(ftc, 'FTC')} {plural(frc, 'FRC')}</h2>
         <p class="lede">Each team has its own identity, goals and outreach, all under the Pleasant Valley FIRST umbrella.</p>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--4">
         {teams.map((team) => <TeamCard team={team} />)}
       </div>
     </div>

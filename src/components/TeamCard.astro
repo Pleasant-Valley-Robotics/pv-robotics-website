@@ -7,7 +7,7 @@ const t = team.data;
 ---
 
 <a class="team" href={`/${team.id}`} style={`--accent: ${t.accent}`}>
-  <div class="logo"><img src={t.logo} alt="" loading="lazy" /></div>
+  <div class="logo" style={`background: ${t.logoBg}`}><img src={t.logo} alt="" loading="lazy" /></div>
   <span class="badge">{t.program} #{t.number}</span>
   <h3>{t.name}</h3>
   <p class="muted">{t.tagline}</p>

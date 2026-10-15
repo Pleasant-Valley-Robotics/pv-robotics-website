@@ -16,7 +16,7 @@ const teams = (await getCollection('teams')).sort((a, b) => a.data.order - b.dat
     <div class="container grid grid--3">
       {teams.map(({ data: t, id }) => (
         <div class="card team" style={`--accent: ${t.accent}`}>
-          <div class="logo"><img src={t.logo} alt="" loading="lazy" /></div>
+          <div class="logo" style={`background: ${t.logoBg}`}><img src={t.logo} alt="" loading="lazy" /></div>
           <span class="eyebrow">{t.program} #{t.number}</span>
           <h3><a href={`/${id}`}>{t.name}</a></h3>
           {t.email && <p><a href={`mailto:${t.email}`}>{t.email}</a></p>}

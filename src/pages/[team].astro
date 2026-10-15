@@ -28,7 +28,7 @@ const { Content } = await render(team);
           </ul>
         )}
       </div>
-      <div class="logo"><img src={t.logo} alt={`${t.name} logo`} /></div>
+      <div class="logo" style={`background: ${t.logoBg}`}><img src={t.logo} alt={`${t.name} logo`} /></div>
     </div>
   </section>
 
@@ -38,6 +38,7 @@ const { Content } = await render(team);
       <aside class="card connect">
         <h3>Connect with {t.shortName}</h3>
         {t.email && <p><a href={`mailto:${t.email}`}>{t.email}</a></p>}
+        {!t.email && t.socials.length === 0 && <p class="muted">Reach this team through the <a href="/contact">contact page</a>.</p>}
         <ul>
           {t.socials.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.label}</a></li>)}
         </ul>

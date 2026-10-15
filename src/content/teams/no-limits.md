@@ -6,7 +6,7 @@ number: 9082
 tagline: Departments of experts, one big team, no member cap.
 logo: /images/teams/no-limit-logo.png
 accent: '#fbbf24'
-order: 3
+order: 4
 email: FRC9082@gmail.com
 socials:
   - { label: Instagram, url: 'https://www.instagram.com/frc_9082/' }

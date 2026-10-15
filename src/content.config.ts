@@ -13,6 +13,8 @@ const teams = defineCollection({
     founded: z.string().optional(),
     tagline: z.string(),
     logo: z.string(),
+    // Background behind the logo: white suits most logos; use a dark color for logos drawn on black.
+    logoBg: z.string().default('#ffffff'),
     photo: z.string().optional(),
     photoAlt: z.string().optional(),
     accent: z.string(),

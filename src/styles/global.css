@@ -116,3 +116,4 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 
 /* Let grid and flex children shrink below their content width on small screens. */
 .grid > * { min-width: 0; }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }

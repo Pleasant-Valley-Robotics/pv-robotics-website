@@ -15,6 +15,7 @@ export const nav = [
   { label: 'About', href: '/about' },
   { label: 'Radical', href: '/radical' },
   { label: 'Deviation', href: '/deviation' },
+  { label: 'Prime Suspects', href: '/prime-suspects' },
   { label: 'No Limit', href: '/no-limits' },
   { label: 'Sponsors', href: '/sponsors' },
   { label: 'Contact', href: '/contact' },
