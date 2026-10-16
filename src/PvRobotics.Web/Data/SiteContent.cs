@@ -27,7 +27,7 @@ public static class SiteContent
             ShortName = "Radical",
             Program = "FTC",
             Number = 7196,
-            Tagline = "Exceed last year's results and make it to the World Championship.",
+            Tagline = "A FIRST Tech Challenge team at Pleasant Valley High School.",
             Logo = "/images/teams/radical-logo.png",
             AccentColor = "#f472b6",
             Socials =
@@ -44,7 +44,7 @@ public static class SiteContent
             ShortName = "Deviation",
             Program = "FTC",
             Number = 6093,
-            Tagline = "Gracious Professionalism, awards and robot performance.",
+            Tagline = "A FIRST Tech Challenge team at Pleasant Valley High School.",
             Logo = "/images/teams/deviation-logo.png",
             AccentColor = "#38bdf8",
             Email = "deviationftm6093@gmail.com",
@@ -60,7 +60,7 @@ public static class SiteContent
             ShortName = "Prime Suspects",
             Program = "FTC",
             Number = 38350,
-            Tagline = "Pleasant Valley's newest FTC team, on the case.",
+            Tagline = "A FIRST Tech Challenge team at Pleasant Valley High School.",
             Logo = "/images/teams/prime-suspects-logo.jpg",
             LogoBackground = "#000000",
             AccentColor = "#3b82f6",
@@ -71,7 +71,7 @@ public static class SiteContent
             ShortName = "No Limit",
             Program = "FRC",
             Number = 9082,
-            Tagline = "Departments of experts, one big team, no member cap.",
+            Tagline = "A FIRST Robotics Competition team at Pleasant Valley High School.",
             Logo = "/images/teams/no-limit-logo.png",
             AccentColor = "#fbbf24",
             Email = "FRC9082@gmail.com",
@@ -123,9 +123,9 @@ public static class SiteContent
     public static readonly List<RoboticsProgram> Programs =
     [
         new("FTC", "FIRST Tech Challenge",
-            "Design, program and drive a robot in an alliance-style competition. Teams of up to fifteen PVCSD students in grades 9–12."),
+            "Design, build, program and drive a robot in an alliance-style competition, and run the team behind it: fundraising, branding and outreach. Teams of up to eighteen PVCSD students in grades 9–12."),
         new("FRC", "FIRST Robotics Competition",
-            "Everything FTC teaches, at industrial scale, plus fundraising, branding and large-team collaboration. Open to any number of PVCSD students in grades 9–12."),
+            "The same, at industrial scale: a bigger robot, a bigger team and large-team collaboration. Open to any number of PVCSD students in grades 9–12."),
     ];
 
     public static readonly List<CoursePathway> Pathways =
