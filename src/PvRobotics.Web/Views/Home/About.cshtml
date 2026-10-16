@@ -1,0 +1,90 @@
+@model AboutViewModel
+@{
+    ViewData["Title"] = "About";
+    ViewData["Description"] = "What Pleasant Valley FIRST is, the FTC and FRC programs, related PVHS classes, and our mentors.";
+}
+
+<partial name="_PageHero" model='new PageHero("About us", "What is Pleasant Valley FIRST?",
+    "PVCSD FIRST is every student, mentor and faculty member who takes part in FIRST’s robotics programs through the school. Robotics is more than building a robot. Students learn engineering alongside problem solving, teamwork and media skills they’ll use every day.")' />
+
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Programs</span>
+            <h2>What can you participate in?</h2>
+        </div>
+        <div class="grid grid--2">
+            @foreach (var program in Model.Programs)
+            {
+                <div class="card">
+                    <span class="program-code">@program.Code</span>
+                    <h3>@program.Name</h3>
+                    <p class="muted">@program.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Our teams</span>
+            <h2>Find your team</h2>
+        </div>
+        <div class="grid grid--4">
+            @foreach (var team in Model.Teams)
+            {
+                <partial name="_TeamCard" model="team" />
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Classes at PVHS</span>
+            <h2>Pathways that pair with robotics</h2>
+            <p class="lede">Pleasant Valley's applied science courses build the same skills our teams use in the shop and at competition.</p>
+        </div>
+        <div class="grid grid--3">
+            @foreach (var pathway in Model.Pathways)
+            {
+                <div class="card">
+                    <h3>@pathway.Name</h3>
+                    <ul class="courses">
+                        @foreach (var course in pathway.Courses)
+                        {
+                            <li>@course</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Mentors &amp; coaches</span>
+            <h2>The adults in the room</h2>
+            <p class="lede">Volunteers and staff who bring engineering, machining, business and media experience to our students.</p>
+        </div>
+        <ul class="mentors">
+            @foreach (var mentor in Model.Mentors)
+            {
+                <li class="card">
+                    <span class="initials" aria-hidden="true">@mentor.Initials</span>
+                    <div>
+                        <strong>@mentor.Name</strong>
+                        <span class="muted">@mentor.Role</span>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<partial name="_CallToAction" />

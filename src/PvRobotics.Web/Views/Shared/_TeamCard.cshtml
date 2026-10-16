@@ -1,0 +1,10 @@
+@model Team
+<a class="team-card" href="@Model.SiteUrl" style="--accent: @Model.AccentColor">
+    <div class="team-card-logo" style="background: @Model.LogoBackground">
+        <img src="@Model.Logo" alt="" loading="lazy" />
+    </div>
+    <span class="badge">@Model.Program #@Model.Number</span>
+    <h3>@Model.Name</h3>
+    <p class="muted">@Model.Tagline</p>
+    <span class="more">Visit @Model.ShortName ↗</span>
+</a>

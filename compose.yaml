@@ -1,0 +1,11 @@
+# How the robotics server runs the main site (www.firstpvrobotics.com).
+# It is a mentors' site: released with `sudo robotics-release website`, which runs this
+# with the machine's own Docker. Caddy sends visitors to 127.0.0.1:18080.
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:18080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    restart: unless-stopped

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PvRobotics.Web/PvRobotics.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PvRobotics.Web.Tests/PvRobotics.Web.Tests.csproj" />
+  </Folder>
+</Solution>

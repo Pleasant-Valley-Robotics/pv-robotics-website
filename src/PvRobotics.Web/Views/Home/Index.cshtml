@@ -1,0 +1,83 @@
+@model HomeViewModel
+@{
+    // Turns 3 into "Three" for the headings below.
+    string[] words = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+    string Count(int n) => n < words.Length ? words[n] : n.ToString();
+    string Teams(int n, string program) => $"{Count(n)} {program} team{(n == 1 ? "" : "s")}.";
+}
+
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container hero-inner">
+        <span class="eyebrow">@SiteContent.School · @SiteContent.Location</span>
+        <h1>PVHS <span class="gradient-text">Robotics</span></h1>
+        <p class="hero-tagline">@SiteContent.Tagline</p>
+        <p class="lede">
+            @Count(Model.Teams.Count) <em>FIRST</em> teams where students design, build, code and compete with real robots,
+            and learn the teamwork, problem solving and communication skills that last well past graduation.
+        </p>
+        <div class="btn-row">
+            <a class="btn btn--primary" href="#teams">Meet our teams</a>
+            <a class="btn btn--ghost" href="/about">What is PV FIRST?</a>
+        </div>
+
+        <dl class="stats">
+            <div><dt>Teams</dt><dd>@Model.Teams.Count</dd></div>
+            <div><dt>Since</dt><dd>2012</dd></div>
+            <div><dt>Programs</dt><dd>FTC · FRC</dd></div>
+            <div><dt>Grades</dt><dd>9–12</dd></div>
+        </dl>
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container grid grid--2">
+        <div class="card feature">
+            <span class="eyebrow">STEM for students</span>
+            <h2>More than building a robot.</h2>
+            <p class="muted">
+                The robotics programs at Pleasant Valley High School introduce young adults to science, technology,
+                engineering and math. Students learn problem solving and the design process, along with communication,
+                teamwork and presentation skills.
+            </p>
+        </div>
+        <div class="card feature">
+            <span class="eyebrow">Our purpose</span>
+            <h2>Skills, confidence, resilience.</h2>
+            <p class="muted">
+                The mission of <em>FIRST</em> is to provide life-changing robotics programs that give young people the skills,
+                confidence and resilience to build a better world. PVCSD Robotics carries those values forward and connects
+                students with mentors and the everyday applications of STEAM.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="teams">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Our teams</span>
+            <h2>@Teams(Model.FtcTeamCount, "FTC") @Teams(Model.FrcTeamCount, "FRC")</h2>
+            <p class="lede">Each team has its own identity, goals and outreach, all under the Pleasant Valley FIRST umbrella.</p>
+        </div>
+        <div class="grid grid--4">
+            @foreach (var team in Model.Teams)
+            {
+                <partial name="_TeamCard" model="team" />
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Thank you</span>
+            <h2>Our sponsors</h2>
+            <p class="lede">These organizations make our season possible.</p>
+        </div>
+        <partial name="_SponsorGrid" model="Model.Sponsors" />
+    </div>
+</section>
+
+<partial name="_CallToAction" />

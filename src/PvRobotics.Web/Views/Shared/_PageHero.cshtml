@@ -1,0 +1,11 @@
+@model PageHero
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">@Model.Eyebrow</span>
+        <h1>@Model.Title</h1>
+        @if (Model.Lede is not null)
+        {
+            <p class="lede">@Model.Lede</p>
+        }
+    </div>
+</section>

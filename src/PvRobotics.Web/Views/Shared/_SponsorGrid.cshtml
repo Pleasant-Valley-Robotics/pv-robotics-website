@@ -1,0 +1,7 @@
+@model List<Sponsor>
+<ul class="sponsors">
+    @foreach (var sponsor in Model)
+    {
+        <li title="@sponsor.Name"><img src="@sponsor.Logo" alt="@sponsor.Name" loading="lazy" /></li>
+    }
+</ul>

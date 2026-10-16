@@ -1,0 +1,45 @@
+@model List<Team>
+@{
+    ViewData["Title"] = "Contact";
+    ViewData["Description"] = "Email and social media for each Pleasant Valley FIRST robotics team.";
+}
+
+<partial name="_PageHero" model='new PageHero("Contact", "Let’s talk robots.",
+    "Interested in what we do? Want to mentor a team, sponsor us or join? Reach out to the team directly or send a general note.")' />
+
+<section class="section">
+    <div class="container grid grid--2">
+        @foreach (var team in Model)
+        {
+            <div class="card contact-team" style="--accent: @team.AccentColor">
+                <div class="contact-logo" style="background: @team.LogoBackground"><img src="@team.Logo" alt="" loading="lazy" /></div>
+                <span class="eyebrow">@team.Program #@team.Number</span>
+                <h3><a href="@team.SiteUrl">@team.Name</a></h3>
+                @if (team.Email is not null)
+                {
+                    <p><a href="mailto:@team.Email">@team.Email</a></p>
+                }
+                @if (team.Email is null && team.Socials.Count == 0)
+                {
+                    <p class="muted">Use the general email below for now.</p>
+                }
+                <ul class="pills">
+                    @foreach (var social in team.Socials)
+                    {
+                        <li><a href="@social.Url" rel="noopener" target="_blank">@social.Label</a></li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container general-contact">
+        <div>
+            <h2>General inquiries</h2>
+            <p class="lede">Mentoring, sponsorship, media or anything else.</p>
+        </div>
+        <a class="btn btn--primary" href="mailto:@SiteContent.ContactEmail">@SiteContent.ContactEmail</a>
+    </div>
+</section>

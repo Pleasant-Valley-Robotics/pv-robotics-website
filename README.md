@@ -1,35 +1,56 @@
 # Pleasant Valley FIRST Robotics website
 
-A static site built with [Astro](https://astro.build). `npm run build` turns it into plain HTML, CSS and images in `dist/`, and any web server can host that folder.
+The main site at **https://www.firstpvrobotics.com**, written in C# with
+ASP.NET Core MVC (.NET 10). Each team's own site lives in its own repository,
+`Pleasant-Valley-Robotics/team-website-<number>`, and is linked from here.
 
-## Working on it
+## Run it on your computer
 
-```bash
-npm install        # first time only
-npm run dev        # live preview at http://localhost:4321 while you edit
-npm run build      # produce the final site in dist/
-npm run preview    # serve the built dist/ folder locally
-```
-
-## Where to edit content
-
-| What | File |
-|------|------|
-| A team's card (name, logo, tagline, socials, email) | `src/content/teams/<team>.md` |
-| A team's own site (story, outreach, photos) | That team's repository: `Pleasant-Valley-Robotics/team-website-<number>` |
-| Mentors, sponsors, programs, class pathways, general email | `src/data/site.ts` |
-| Navigation menu | `nav` in `src/data/site.ts` |
-| Images (logos, photos) | `public/images/` |
-| Colors and fonts | `src/styles/global.css` |
-
-Each team has its own site at `https://<number>.firstpvrobotics.com`, built from its own repository (start a new one from `Pleasant-Valley-Robotics/team-website-template`). Adding a `.md` file in `src/content/teams/` adds that team's card here; add it to `nav` in `src/data/site.ts` too.
-
-To add a sponsor, put the logo in `public/images/sponsors/` and add a line to `sponsors` in `src/data/site.ts`.
-
-## Releasing
-
-Pushing to `main` builds the site onto the `release` branch (GitHub Actions). The robotics server then serves it after:
+Install the [.NET 10 SDK](https://dotnet.microsoft.com/download), then:
 
 ```bash
-sudo robotics-release website release
+dotnet run --project src/PvRobotics.Web     # opens http://localhost:5254
+dotnet test                                  # runs the tests
 ```
+
+`dotnet watch --project src/PvRobotics.Web` reloads the page each time you save.
+
+## How it's put together (MVC)
+
+| Folder | What's in it |
+|---|---|
+| `src/PvRobotics.Web/Program.cs` | Where the site starts: what it uses and what happens to each request |
+| `Models/` | The shapes of the data: a `Team`, a `Sponsor`, a `Mentor` |
+| `Data/SiteContent.cs` | **The words and lists the site shows.** Most edits happen here |
+| `Controllers/` | One method per page. Each picks its data and hands it to a view. The `[Route("about")]` above a method is that page's address |
+| `Views/Home/` | The HTML for each page (Razor: HTML plus `@` for C#) |
+| `Views/Shared/` | `_Layout.cshtml` is the frame around every page; the files starting with `_` are reusable pieces |
+| `wwwroot/` | Files sent as-is: `css/site.css`, `images/`, `fonts/` |
+| `tests/PvRobotics.Web.Tests/` | Tests that visit every page and check the data. GitHub runs them on every pull request |
+
+## Common changes
+
+| Change | Where |
+|---|---|
+| Add or change a sponsor | Put the logo in `wwwroot/images/sponsors/`, add a line to `Sponsors` in `SiteContent.cs` |
+| Add a mentor | `Mentors` in `SiteContent.cs` |
+| Add a team | `Teams` in `SiteContent.cs` (and a logo in `wwwroot/images/teams/`). The team's own site comes from `team-website-template` |
+| Add a page | A method in `HomeController.cs` with `[Route("new-page")]`, a view `Views/Home/NewPage.cshtml`, and a link in `Nav` in `SiteContent.cs` |
+| Colors and fonts | The top of `wwwroot/css/site.css` |
+
+## How it gets to the server
+
+1. Open a pull request. GitHub builds the site, runs the tests and starts the container.
+2. Merge it into `main`.
+3. A mentor releases it on the robotics server:
+
+   ```bash
+   sudo robotics-release website
+   ```
+
+   The server pulls `main`, builds the container, and switches visitors to it only
+   if `/healthz` answers. Otherwise the previous version keeps running.
+   `sudo robotics-release website --back` puts the previous version back.
+
+The files the server uses: `Dockerfile` (build and run the site), `compose.yaml`
+(run it on port 18080), and `/srv/live/website/site.conf` on the server.

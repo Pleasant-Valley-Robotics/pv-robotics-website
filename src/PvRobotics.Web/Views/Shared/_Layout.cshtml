@@ -1,0 +1,93 @@
+@*
+    The frame around every page: the <head>, the menu at the top and the footer.
+    Each page's own content appears where @RenderBody() is.
+    A page sets its title with ViewData["Title"] and its summary with ViewData["Description"].
+*@
+@{
+    var pageTitle = ViewData["Title"] as string;
+    var fullTitle = pageTitle is null ? SiteContent.Name : $"{pageTitle} | {SiteContent.ShortName}";
+    var description = ViewData["Description"] as string
+        ?? $"{SiteContent.Name}: FTC and FRC robotics teams at {SiteContent.School} in {SiteContent.Location}.";
+    var currentPath = Context.Request.Path.Value?.TrimEnd('/') ?? "";
+    var siteUrl = "https://www.firstpvrobotics.com";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@fullTitle</title>
+    <meta name="description" content="@description" />
+    <link rel="canonical" href="@(siteUrl + (currentPath == "" ? "/" : currentPath))" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#070b1f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@fullTitle" />
+    <meta property="og:description" content="@description" />
+    <meta property="og:image" content="@siteUrl/images/brand/pv-logo.png" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="header">
+        <div class="container bar">
+            <a class="brand" href="/" aria-label="@SiteContent.Name home">
+                <img src="/images/brand/pv-logo.png" alt="" width="40" height="40" />
+                <span>PV <span class="gradient-text">Robotics</span></span>
+            </a>
+
+            @* A <details> menu opens and closes on phones without any JavaScript. *@
+            <details class="menu">
+                <summary aria-label="Menu"><span class="burger" aria-hidden="true"></span></summary>
+                <nav aria-label="Main">
+                    <ul>
+                        @foreach (var link in SiteContent.Nav)
+                        {
+                            <li><a href="@link.Href" aria-current="@(currentPath == link.Href ? "page" : null)">@link.Label</a></li>
+                        }
+                    </ul>
+                </nav>
+            </details>
+        </div>
+    </header>
+
+    <main id="main">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div>
+                <a class="brand" href="/">
+                    <img src="/images/brand/pv-logo.png" alt="" width="44" height="44" />
+                    <span>@SiteContent.Name</span>
+                </a>
+                <p class="muted">@SiteContent.Tagline<br />@SiteContent.School · @SiteContent.Location</p>
+            </div>
+            <nav aria-label="Footer">
+                <ul class="footer-links">
+                    @foreach (var link in SiteContent.Nav)
+                    {
+                        <li><a href="@link.Href">@link.Label</a></li>
+                    }
+                </ul>
+            </nav>
+            <div class="footer-first">
+                <img src="/images/brand/first-logo.png" alt="FIRST" width="111" height="70" />
+                <p class="muted small">Proud participants in <em>FIRST</em>® Tech Challenge and <em>FIRST</em>® Robotics Competition.</p>
+            </div>
+        </div>
+        <div class="container legal muted small">© @DateTime.Now.Year @SiteContent.Name</div>
+    </footer>
+
+    <script>
+        // On wide screens the menu should always be open; on phones it starts closed.
+        const menu = document.querySelector('.menu');
+        const wide = window.matchMedia('(min-width: 900px)');
+        const sync = () => { if (menu) menu.open = wide.matches; };
+        sync();
+        wide.addEventListener('change', sync);
+    </script>
+</body>
+</html>
