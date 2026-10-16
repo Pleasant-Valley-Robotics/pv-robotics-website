@@ -123,9 +123,9 @@ public static class SiteContent
     public static readonly List<RoboticsProgram> Programs =
     [
         new("FTC", "FIRST Tech Challenge",
-            "Design, program and drive a robot in an alliance-style competition. Teams of up to fifteen PVCSD students in grades 9–12."),
+            "Design, build, program and drive a robot in an alliance-style competition, and run the team behind it: fundraising, branding and outreach. Teams of up to fifteen PVCSD students in grades 9–12."),
         new("FRC", "FIRST Robotics Competition",
-            "Everything FTC teaches, at industrial scale, plus fundraising, branding and large-team collaboration. Open to any number of PVCSD students in grades 9–12."),
+            "The same, at industrial scale: a bigger robot, a bigger team and large-team collaboration. Open to any number of PVCSD students in grades 9–12."),
     ];
 
     public static readonly List<CoursePathway> Pathways =
