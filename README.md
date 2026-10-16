@@ -15,12 +15,21 @@ npm run preview    # serve the built dist/ folder locally
 
 | What | File |
 |------|------|
-| A team's story, outreach, socials, email | `src/content/teams/<team>.md` |
+| A team's card (name, logo, tagline, socials, email) | `src/content/teams/<team>.md` |
+| A team's own site (story, outreach, photos) | That team's repository: `Pleasant-Valley-Robotics/team-website-<number>` |
 | Mentors, sponsors, programs, class pathways, general email | `src/data/site.ts` |
 | Navigation menu | `nav` in `src/data/site.ts` |
 | Images (logos, photos) | `public/images/` |
 | Colors and fonts | `src/styles/global.css` |
 
-Each team file's name is its URL: `radical.md` is `/radical`. Adding a new `.md` file there creates a new team page automatically.
+Each team has its own site at `https://<number>.firstpvrobotics.com`, built from its own repository (start a new one from `Pleasant-Valley-Robotics/team-website-template`). Adding a `.md` file in `src/content/teams/` adds that team's card here; add it to `nav` in `src/data/site.ts` too.
 
 To add a sponsor, put the logo in `public/images/sponsors/` and add a line to `sponsors` in `src/data/site.ts`.
+
+## Releasing
+
+Pushing to `main` builds the site onto the `release` branch (GitHub Actions). The robotics server then serves it after:
+
+```bash
+sudo robotics-release website release
+```

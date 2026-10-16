@@ -1,17 +1,18 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { teamUrl } from '../data/site';
 
 interface Props { team: CollectionEntry<'teams'> }
 const { team } = Astro.props;
 const t = team.data;
 ---
 
-<a class="team" href={`/${team.id}`} style={`--accent: ${t.accent}`}>
+<a class="team" href={teamUrl(t.number)} style={`--accent: ${t.accent}`}>
   <div class="logo" style={`background: ${t.logoBg}`}><img src={t.logo} alt="" loading="lazy" /></div>
   <span class="badge">{t.program} #{t.number}</span>
   <h3>{t.name}</h3>
   <p class="muted">{t.tagline}</p>
-  <span class="more">Meet the team →</span>
+  <span class="more">Visit {t.shortName} ↗</span>
 </a>
 
 <style>

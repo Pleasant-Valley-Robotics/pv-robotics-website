@@ -1,8 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// Each team is one Markdown file in src/content/teams/.
-// The frontmatter (between the --- lines) holds the facts; the body is the team's story.
+// Each team is one Markdown file in src/content/teams/: just what the main site's cards
+// and contact page need. Each team's full site lives in its own repository
+// (Pleasant-Valley-Robotics/team-website-<number>) at https://<number>.firstpvrobotics.com.
 const teams = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/teams' }),
   schema: z.object({

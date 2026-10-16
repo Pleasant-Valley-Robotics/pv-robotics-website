@@ -11,12 +11,15 @@ export const site = {
   contactEmail: 'FRC9082@gmail.com',
 };
 
+// Each team's own site, served by the robotics server from the team's repository.
+export const teamUrl = (number: number) => `https://${number}.firstpvrobotics.com`;
+
 export const nav = [
   { label: 'About', href: '/about' },
-  { label: 'Radical', href: '/radical' },
-  { label: 'Deviation', href: '/deviation' },
-  { label: 'Prime Suspects', href: '/prime-suspects' },
-  { label: 'No Limit', href: '/no-limits' },
+  { label: 'Radical', href: teamUrl(7196) },
+  { label: 'Deviation', href: teamUrl(6093) },
+  { label: 'Prime Suspects', href: teamUrl(38350) },
+  { label: 'No Limit', href: teamUrl(9082) },
   { label: 'Sponsors', href: '/sponsors' },
   { label: 'Contact', href: '/contact' },
 ];

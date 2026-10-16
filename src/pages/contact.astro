@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { site } from '../data/site';
+import { site, teamUrl } from '../data/site';
 
 const teams = (await getCollection('teams')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -14,11 +14,11 @@ const teams = (await getCollection('teams')).sort((a, b) => a.data.order - b.dat
 
   <section class="section">
     <div class="container grid grid--3">
-      {teams.map(({ data: t, id }) => (
+      {teams.map(({ data: t }) => (
         <div class="card team" style={`--accent: ${t.accent}`}>
           <div class="logo" style={`background: ${t.logoBg}`}><img src={t.logo} alt="" loading="lazy" /></div>
           <span class="eyebrow">{t.program} #{t.number}</span>
-          <h3><a href={`/${id}`}>{t.name}</a></h3>
+          <h3><a href={teamUrl(t.number)}>{t.name}</a></h3>
           {t.email && <p><a href={`mailto:${t.email}`}>{t.email}</a></p>}
           <ul>
             {t.socials.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.label}</a></li>)}

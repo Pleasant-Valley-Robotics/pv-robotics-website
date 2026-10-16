@@ -7,7 +7,6 @@ import CallToAction from '../components/CallToAction.astro';
 import { site } from '../data/site';
 
 const teams = (await getCollection('teams')).sort((a, b) => a.data.order - b.data.order);
-const outreachCount = teams.reduce((n, t) => n + t.data.outreach.length, 0);
 const words = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 const count = (n: number) => words[n] ?? String(n);
 const ftc = teams.filter((t) => t.data.program === 'FTC').length;
@@ -33,7 +32,7 @@ const plural = (n: number, w: string) => `${count(n)} ${w} team${n === 1 ? '' : 
       <dl class="stats">
         <div><dt>Teams</dt><dd>{teams.length}</dd></div>
         <div><dt>Since</dt><dd>2012</dd></div>
-        <div><dt>Outreach projects</dt><dd>{outreachCount}+</dd></div>
+        <div><dt>Programs</dt><dd>FTC · FRC</dd></div>
         <div><dt>Grades</dt><dd>9–12</dd></div>
       </dl>
     </div>
